@@ -22,13 +22,26 @@ const FriendRequests: FC<FriendRequestsProps> = ({
   const acceptFriend = async (senderId: string) => {
     await axios.post("/api/friends/accept", { id: senderId });
 
+    console.log("friend req prima:", friendRequests);
+    console.log("senderID:", senderId);
     setFriendRequests((prev) =>
-      prev.filter((request) => request.senderId !== senderId)
+      prev.filter((request) => {
+        console.log("prev: ", prev);
+        console.log("req: ", request);
+        console.log("check: ", request.senderId !== senderId);
+        request.senderId !== senderId;
+      })
     );
+    console.log("friend req dopo:", friendRequests);
+
     router.refresh();
+
+    console.log("refreshed");
+    console.log("friend req dopo refresh:", friendRequests);
   };
 
   const denyFriend = async (senderId: string) => {
+    // console.log("senderId:");
     await axios.post("/api/friends/deny", { id: senderId });
 
     setFriendRequests((prev) =>
