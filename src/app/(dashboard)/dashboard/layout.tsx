@@ -45,7 +45,7 @@ const Layout = async ({ children }: LayoutProps) => {
   ).length;
 
   return (
-    <div className="w-full flex h-screen">
+    <div className="flex h-screen w-full">
       {/* Sidebar */}
 
       <div className="flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
@@ -76,9 +76,9 @@ const Layout = async ({ children }: LayoutProps) => {
                     <li key={option.id}>
                       <Link
                         href={option.href}
-                        className="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                        className="group flex gap-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
                       >
-                        <span className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white ">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600 ">
                           <Icon className="h-4 w-4" />
                         </span>
                         <span className="truncate">{option.name}</span>
@@ -114,12 +114,14 @@ const Layout = async ({ children }: LayoutProps) => {
                   </span>
                 </div>
               </div>
-              <SignOutButton className="h-full aspect-square" />
+              <SignOutButton className="aspect-square h-full" />
             </li>
           </ul>
         </nav>
       </div>
-      {children}
+      <aside className="container max-h-screen w-full py-16 md:py-12">
+        {children}
+      </aside>
     </div>
   );
 };

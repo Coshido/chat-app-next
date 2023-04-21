@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
     //await db.srem(`user:${idToAdd}:outbound_friend_requests`, session.user.id);
 
-    await db.srem(`user:${session.user.id}:incoming_friend-requests`, idToAdd);
+    await db.srem(`user:${session.user.id}:incoming_friend_requests`, idToAdd);
 
     return new Response("Ok");
   } catch (error) {

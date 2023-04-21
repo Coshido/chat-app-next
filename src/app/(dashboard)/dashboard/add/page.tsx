@@ -8,9 +8,8 @@ const page = async ({}) => {
   console.log(session);
   return (
     <main className="pt-8">
-      <h1 className="font-bold text-5xl mb-8">Add a friend</h1>
+      <h1 className="mb-8 text-5xl font-bold">Add a friend</h1>
       <AddFriendButton />
-      <Link href="/dashboard">Back</Link>
     </main>
   );
 };
