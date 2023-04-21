@@ -31,13 +31,12 @@ const Messages: FC<MessagesProps> = ({
     };
 
     pusherClient.bind("incoming_message", messageHandler);
+
     return () => {
-      pusherClient.unsubscribe(
-        toPusherKey(`user:${sessionId}:incoming_message`)
-      );
+      pusherClient.unsubscribe(toPusherKey(`chat:${chatId}`));
       pusherClient.unbind("incoming_message", messageHandler);
     };
-  }, []);
+  }, [chatId]);
 
   const scrollDownRef = useRef<HTMLDivElement | null>(null);
 

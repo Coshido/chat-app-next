@@ -8,7 +8,7 @@ import { error } from "console";
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const Page: FC<pageProps> = ({}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function loginWithGoogle() {
@@ -35,8 +35,8 @@ const page: FC<pageProps> = ({}) => {
 
   return (
     <>
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="flex w-full flex-col items-center max-w-md space-y-8">
+      <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+        <div className="flex w-full max-w-md flex-col items-center space-y-8">
           <div className="flex flex-col items-center gap-8">
             logo
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
@@ -46,7 +46,7 @@ const page: FC<pageProps> = ({}) => {
           <Button
             isLoading={isLoading}
             type="button"
-            className="max-w-sm mx-auto w-full"
+            className="mx-auto w-full max-w-sm"
             onClick={loginWithGoogle}
           >
             {isLoading ? null : (
@@ -84,7 +84,7 @@ const page: FC<pageProps> = ({}) => {
           <Button
             isLoading={isLoading}
             type="button"
-            className="max-w-sm mx-auto w-full"
+            className="mx-auto w-full max-w-sm"
             onClick={loginWithGitHub}
           >
             GitHub
@@ -95,4 +95,4 @@ const page: FC<pageProps> = ({}) => {
   );
 };
 
-export default page;
+export default Page;
