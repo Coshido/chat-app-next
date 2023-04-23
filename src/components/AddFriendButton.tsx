@@ -31,9 +31,10 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
   });
 
   const addFrined = async (email: string) => {
+    console.log("add friend");
     try {
       const validatedEmail = addFriendValidator.parse({ email });
-
+      console.log("asd");
       await axios.post("/api/friends/add", {
         email: validatedEmail,
       });
@@ -45,6 +46,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
       }
       if (error instanceof AxiosError) {
         setError("email", { message: error.response?.data });
+
         return;
       }
       setError("email", { message: "Something went wrong" });
@@ -52,13 +54,14 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
   };
 
   const onSubmit = (data: FormData) => {
+    console.log("submit");
     addFrined(data.email);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm">
       <label
         htmlFor="email"
-        className="block text-sm ont-medium leading-6 text-gray-900"
+        className="ont-medium block text-sm leading-6 text-gray-900"
       >
         Add friend by E-Mail
       </label>
@@ -66,7 +69,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
         <input
           {...register("email")}
           type="text"
-          className="block w-ull rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          className="w-ull block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           placeholder="you@example.com"
         />
         <Button>Add</Button>
