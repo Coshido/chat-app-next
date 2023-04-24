@@ -50,36 +50,27 @@ export async function POST(req: Request) {
     const message = messageValidator.parse(messageData);
 
     // notify all chat room clients
-    await Promise.all([
-      pusherServer.trigger(
-        toPusherKey(`chat:${chatId}`),
-        `incoming_message`,
-        message
-      ),
-      pusherServer.trigger(
-        toPusherKey(`user:${friendId}:chats`),
-        `new_message`,
-        {
-          ...message,
-          senderImg: parsedSender.image,
-          senderName: parsedSender.name,
-        }
-      ),
-      pusherServer.trigger(
-        toPusherKey(`user:${friendId}:chats`),
-        `new_message`,
-        {
-          ...message,
-          senderImg: parsedSender.image,
-          senderName: parsedSender.name,
-        }
-      ),
+    await pusherServer.trigger(
+      toPusherKey(`chat:${chatId}`),
+      "incoming_message",
+      message
+    );
 
-      db.zadd(`chat:${chatId}:messages`, {
-        score: timestamp,
-        member: JSON.stringify(message),
-      }),
-    ]);
+    await pusherServer.trigger(
+      toPusherKey(`user:${friendId}:chats`),
+      "new_message",
+      {
+        ...message,
+        senderImg: parsedSender.image,
+        senderName: parsedSender.name,
+      }
+    );
+
+    // all valid, send the message
+    await db.zadd(`chat:${chatId}:messages`, {
+      score: timestamp,
+      member: JSON.stringify(message),
+    });
 
     return new Response("OK");
   } catch (error) {
